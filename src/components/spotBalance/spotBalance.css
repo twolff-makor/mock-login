@@ -1,10 +1,10 @@
 .spot-balance {
     position: absolute;
-    top: 16rem;
-    left: 46rem;;
+    top: 12rem;
+    left: 44rem;;
 	overflow-y: scroll;
-	height: 20rem;
-	width: 46rem;
+	height: 26rem;
+	width: 47rem;
 	background: black;
 }
 

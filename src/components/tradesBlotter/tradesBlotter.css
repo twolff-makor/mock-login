@@ -1,17 +1,19 @@
 .trades-blotter {
     position: absolute;
     top: 40rem;
-    left: 4rem;;
+    left: 12rem;;
 	overflow-y: scroll;
     overflow-x: scroll;
 	height: 40rem;
-	width: 186rem;
 	background: black;
+    width: 166rem;
 }
 
 .trades-blotter table{
     font-size: 1.4rem;
     border-collapse: collapse;
+    white-space: nowrap
+
 }
 
 .trades-blotter thead {
@@ -22,15 +24,15 @@
 }
 
 .trades-blotter td {
-    padding: 0.1rem 2rem 0.1rem 1.4rem;
+    padding: 0.2rem 2rem 0.2rem 1.4rem;
     border: 0.1rem solid grey;
     border-left: none;
     border-right: none;
-    width: auto;
 }
 
 .trades-blotter th {
     font-weight: 400;
+    padding: 1rem;
 }
 
 ::-webkit-scrollbar {

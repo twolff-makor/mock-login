@@ -48,7 +48,6 @@ function TradesBlotter() {
 	};
 
 	const formatStr = (str) => {
-	    console.log(str);
 			const strFragments = str.split('_');
             const newStr = strFragments.map((fragment)=>{
                 return fragment.charAt(0).toUpperCase() + fragment.slice(1);
@@ -60,7 +59,6 @@ function TradesBlotter() {
 		if (!visibleTrades) {
 			setVisibleTrades(content.data);
 		}
-		console.log(content.data);
 	};
 
 	useEffect(() => {
@@ -82,7 +80,7 @@ function TradesBlotter() {
 					<tr>
 						{visibleTrades &&
 							Object.keys(visibleTrades[0]).map((name) => {
-								return <th>{formatStr(name)}</th>;
+								return <th key={name}>{formatStr(name)}</th>;
 							})}
 					</tr>
 				</thead>
@@ -91,8 +89,8 @@ function TradesBlotter() {
 						visibleTrades.map((trade) => {
 							return (
 								<tr key={trade.id}>
-									{Object.keys(trade).map((tradeDetail) => {
-										return <td>{trade[tradeDetail]}</td>;
+									{Object.keys(trade).map((tradeDetail, index) => {
+										return <td key={index}>{trade[tradeDetail]}</td>;
 									})}
 								</tr>
 							);
