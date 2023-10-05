@@ -1,0 +1,9 @@
+.input-field-container {
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+.input {
+    display: flex;
+    margin: 0.6rem;
+}

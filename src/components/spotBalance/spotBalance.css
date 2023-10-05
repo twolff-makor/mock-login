@@ -1,0 +1,36 @@
+.spot-balance {
+    position: absolute;
+    top: 16rem;
+    left: 46rem;;
+	overflow-y: scroll;
+	height: 20rem;
+	width: 46rem;
+	background: black;
+}
+
+.spot-balance table{
+    font-size: 1.4rem;
+    border-collapse: collapse;
+}
+
+.spot-balance thead {
+	position: sticky;
+    top: 0rem;
+    background-color: black;
+    z-index: 1;
+}
+
+.spot-balance td {
+    padding: 0.1rem 2rem 0.1rem 1.4rem;
+    border: 0.1rem solid grey;
+    border-left: none;
+    border-right: none;
+}
+
+.spot-balance th {
+    font-weight: 400;
+}
+
+::-webkit-scrollbar {
+	width: 0rem;
+}

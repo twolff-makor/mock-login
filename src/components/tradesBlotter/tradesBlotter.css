@@ -1,0 +1,43 @@
+.trades-blotter {
+    position: absolute;
+    top: 40rem;
+    left: 4rem;;
+	overflow-y: scroll;
+    overflow-x: scroll;
+	height: 40rem;
+	width: 186rem;
+	background: black;
+}
+
+.trades-blotter table{
+    font-size: 1.4rem;
+    border-collapse: collapse;
+}
+
+.trades-blotter thead {
+	position: sticky;
+    top: 0rem;
+    background-color: black;
+    z-index: 1;
+}
+
+.trades-blotter td {
+    padding: 0.1rem 2rem 0.1rem 1.4rem;
+    border: 0.1rem solid grey;
+    border-left: none;
+    border-right: none;
+    width: auto;
+}
+
+.trades-blotter th {
+    font-weight: 400;
+}
+
+::-webkit-scrollbar {
+	width: 0rem;
+    height: 0.6rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background: grey;
+}
