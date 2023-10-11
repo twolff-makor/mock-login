@@ -1,6 +1,7 @@
 .two-fa-container {
     width: 20rem;
-    height: 40rem;
+    height: 14rem;
+    text-align: center;
 }
 
 .two-fa-btn {
@@ -8,4 +9,3 @@
     width: 20rem;
     margin: 1rem;
 }
-

@@ -1,13 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { closeWebSocket, openWebSocket, sendWebSocketMessage, setMessageHandler } from '../../services/websocket';
+import {
+	closeWebSocket,
+	openWebSocket,
+	sendWebSocketMessage,
+	setMessageHandler,
+} from '../../services/websocket';
 import { ClickTrader, SpotBalance, TradesBlotter } from '../../components/';
 import './homePage.css';
 
 function HomePage() {
 	const navigate = useNavigate();
 	const [connection, setConnection] = useState(false);
-	const [ctConfig, setCtConfig] = useState(null)
+	const [ctConfig, setCtConfig] = useState(null);
+	const [TOKEN, setTOKEN] = useState(localStorage.getItem('TOKEN'));
 
 	const ctConfigMsg = JSON.stringify({
 		type: 'get_product_config',
@@ -18,26 +24,26 @@ function HomePage() {
 	});
 
 	const createWebSocketConnection = async () => {
-		await openWebSocket(localStorage.getItem(`TOKEN`));
+		await openWebSocket(TOKEN);
 		setConnection(true);
-		getConfig()
+		getConfig();
 	};
 
 	const getConfig = async () => {
 		sendWebSocketMessage(ctConfigMsg);
 		await setMessageHandler(handleConfigMessage, `get_product_config`, false);
-	}
+	};
 
 	useEffect(() => {
 		createWebSocketConnection();
 	}, []);
-	
-	const handleConfigMessage = ( {content} ) => {
+
+	const handleConfigMessage = ({ content }) => {
 		setCtConfig(content);
-		};
+	};
 
 	function handleLogout() {
-		localStorage.removeItem('TOKEN');
+		localStorage.clear();
 		closeWebSocket();
 		navigate('/');
 	}
@@ -45,16 +51,15 @@ function HomePage() {
 	return (
 		<>
 			<button className="logout-btn" onClick={handleLogout}>
-				log out
+				Log Out
 			</button>
-			{connection &&
-				ctConfig && (
-					<>
-						<ClickTrader config={ctConfig.map(obj => obj.name)} />
-						<SpotBalance />
-						<TradesBlotter />
-					</>
-				) } 
+			{connection && ctConfig && TOKEN && (
+				<>
+					<ClickTrader config={ctConfig.map((obj) => obj.name)} />
+					<SpotBalance />
+					<TradesBlotter />
+				</>
+			)}
 		</>
 	);
 }

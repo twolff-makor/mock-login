@@ -2,23 +2,23 @@ let ws = null;
 const WS_URL = import.meta.env.VITE_WS_URL;
 
 
-async function openWebSocket(token) {
-	const tokenizedUrl = `${WS_URL}/?token=${token}`;
+async function openWebSocket(TOKEN) {
+	const tokenizedUrl = `${WS_URL}/?token=${TOKEN}`;
 	return new Promise((resolve, reject) => {
 		if (!ws) {
 			ws = new WebSocket(tokenizedUrl);
 			ws.addEventListener('open', (event) => {
-				console.log('WebSocket connection opened:', event);
+				// console.log('WebSocket connection opened:', event);
 				setTimeout(() => {
 					// if (ws.readyState === 1) {
-						console.log('WebSocket connection established.');
+						// console.log('WebSocket connection established.');
 						resolve(ws);
 					// }
 				}, 1000);
 			});
 
 			ws.addEventListener('close', (event) => {
-				 console.log('WebSocket connection closed:', event);
+				//  console.log('WebSocket connection closed:', event);
                  ws = null;
 			});
 

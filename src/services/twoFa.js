@@ -18,7 +18,8 @@ async function getTwoFa(username, password, type) {
 				}
 			)
 			.then((response) => {
-                console.log(response);
+                localStorage.setItem('SESSION_TOKEN', response.data.token);
+				resolve(response)
 			})
 			.catch((error) => {
 				reject(error);
@@ -27,4 +28,33 @@ async function getTwoFa(username, password, type) {
 	});
 }
 
- export { getTwoFa };
+
+async function setTwoFa(sixDigits) {
+	const SESSION_TOKEN = localStorage.getItem('SESSION_TOKEN')
+	return new Promise((resolve, reject) => {
+		axios
+			.put(
+				`${REST_URL}/auth/register`,
+				{
+					six_digits: sixDigits
+				},
+				{
+					headers: {
+						'content-Type': 'application/json',
+						Authorization: `Bearer ${SESSION_TOKEN}`
+					},
+				}
+			)
+			.then((response) => {
+				localStorage.clear();
+				localStorage.setItem('TOKEN', response.data.token)
+				resolve(response.data.is_final_auth || false);
+			})
+			.catch((error) => {
+				reject(error);
+				console.log(`Auth failed with message : ${error}`);
+			});
+	});
+}
+
+ export { getTwoFa, setTwoFa};
