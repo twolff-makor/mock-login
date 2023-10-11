@@ -10,6 +10,7 @@ function LoginForm () {
         username : '',
         password : '',
     })
+    const [passwordError, setPasswordError] = useState(false)
 
     const handleInputChange = (event) => {
         const name = event.target.name
@@ -23,10 +24,17 @@ function LoginForm () {
 
     const handleSubmit = async (event) => {
 			event.preventDefault();
-            const authorized = await getAuth(formData.username, formData.password)
-			if (authorized) {
+      const authorized = await getAuth(formData.username, formData.password)
+			if (authorized === 'authorized') {
                 navigate('/HomePage');
-            }
+          } 
+      else if (authorized === '2fa') {
+                localStorage.setItem('USERNAME', formData.username)
+                localStorage.setItem('PASSWORD', formData.password)
+                navigate('/TwoFaPage')
+      } else {
+        setPasswordError(true);
+      }
 		};
 
     return (
@@ -47,9 +55,11 @@ function LoginForm () {
           value={formData.password} 
           onChange={handleInputChange} 
         />
-        
         <input type="submit" value="Submit" className="submit-btn"/>
       </form>
+      <div className={passwordError ? "password-alert" : "password-alert-hidden"}>
+        Wrong Credentials
+      </div>
     </div>
     )
 }

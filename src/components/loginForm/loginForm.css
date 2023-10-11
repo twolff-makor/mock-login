@@ -7,3 +7,12 @@
 .submit-btn {
     margin: 1rem;
 }
+
+.password-alert{
+    color: red;
+    display: block;
+}
+
+.password-alert-hidden {
+    display: none;
+}
