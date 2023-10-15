@@ -55,11 +55,13 @@ function TradesBlotter() {
 			return newStr;
 		}
 
-	const handleTradesMessage = ({ content } = msg) => {
-		if (!visibleTrades) {
-			setVisibleTrades(content.data);
-		}
-	};
+    	const handleTradesMessage = ({ content } = msg) => {
+				if (content.data.length > 30) {
+					setVisibleTrades(content.data);
+				} else {
+					setVisibleTrades((currentTrades)=> [...content.data, ...currentTrades]);
+				}
+			};
 
 	useEffect(() => {
 		sendWebSocketMessage(JSON.stringify(tradesData));
@@ -88,7 +90,7 @@ function TradesBlotter() {
 					{visibleTrades &&
 						visibleTrades.map((trade) => {
 							return (
-								<tr key={trade.id}>
+								<tr key={trade.id + trade.nominal}>
 									{Object.keys(trade).map((tradeDetail, index) => {
 										return <td key={index}>{trade[tradeDetail]}</td>;
 									})}
